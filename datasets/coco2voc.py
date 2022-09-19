@@ -47,7 +47,10 @@ def coco_to_voc_detection(coco_annotation_file, target_folder):
 
 
 if __name__ == '__main__':
-    coco_annotation_file = 'data/coco/annotations/instances_train2017.json'
-    target_folder = 'data/VOC2007'
-    coco_to_voc_detection(coco_annotation_file, target_folder)
-    imagesets(coco_annotation_file, target_folder)
+    files = ['instances_train2017.json', 'instances_val2017.json']
+    coco_annotation_path = 'data/coco/annotations'
+    target_folder = 'data/OWDETR/VOC2007'
+    for filename in files:
+        filepath = os.path.join(coco_annotation_path, filename)
+        coco_to_voc_detection(filepath, target_folder)
+        # imagesets(filepath, target_folder)
