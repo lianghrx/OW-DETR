@@ -137,11 +137,11 @@ def make_coco_transforms(image_set):
         t.append(T.Compose([
             T.RandomHorizontalFlip(),
             T.RandomSelect(
-                T.RandomResize(scales, max_size=1333),
+                T.RandomResize(scales, max_size=640),
                 T.Compose([
                     T.RandomResize([400, 500, 600]),
                     T.RandomSizeCrop(384, 600),
-                    T.RandomResize(scales, max_size=1333),
+                    T.RandomResize(scales, max_size=640),
                 ])
             ),
             normalize,
@@ -153,11 +153,11 @@ def make_coco_transforms(image_set):
         t.append(T.Compose([
             T.RandomHorizontalFlip(),
             T.RandomSelect(
-                T.RandomResize(scales, max_size=1333),
+                T.RandomResize(scales, max_size=640),
                 T.Compose([
                     T.RandomResize([400, 500, 600]),
                     T.RandomSizeCrop(384, 600),
-                    T.RandomResize(scales, max_size=1333),
+                    T.RandomResize(scales, max_size=640),
                 ])
             ),
             normalize,
@@ -167,7 +167,7 @@ def make_coco_transforms(image_set):
     if 'val' in image_set:
         t.append(['val'])
         t.append(T.Compose([
-            T.RandomResize([800], max_size=1333),
+            T.RandomResize([800], max_size=800),
             normalize,
         ]))
         return t
@@ -175,7 +175,7 @@ def make_coco_transforms(image_set):
     if 'test' in image_set:
         t.append(['test'])
         t.append(T.Compose([
-            T.RandomResize([800], max_size=1333),
+            T.RandomResize([800], max_size=800),
             normalize,
         ]))
         return t
@@ -196,11 +196,11 @@ def make_ori_coco_transforms(image_set):
         return T.Compose([
             T.RandomHorizontalFlip(),
             T.RandomSelect(
-                T.RandomResize(scales, max_size=1333),
+                T.RandomResize(scales, max_size=640),
                 T.Compose([
                     T.RandomResize([400, 500, 600]),
                     T.RandomSizeCrop(384, 600),
-                    T.RandomResize(scales, max_size=1333),
+                    T.RandomResize(scales, max_size=640),
                 ])
             ),
             normalize,
@@ -208,7 +208,7 @@ def make_ori_coco_transforms(image_set):
 
     if image_set == 'val':
         return T.Compose([
-            T.RandomResize([800], max_size=1333),
+            T.RandomResize([800], max_size=800),
             normalize,
         ])
 
