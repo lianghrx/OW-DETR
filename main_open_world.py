@@ -302,7 +302,7 @@ def main(args):
                     'args': args,
                 }, checkpoint_path)
 
-        if args.dataset in ['owod'] and epoch % args.eval_every == 0 and epoch > 0:
+        if args.dataset in ['owod'] and (epoch + 1) % args.eval_every == 0 and epoch > 0:
             test_stats, coco_evaluator = evaluate(
                 model, criterion, postprocessors, data_loader_val, base_ds, device, args.output_dir, args
             )
@@ -318,13 +318,13 @@ def main(args):
             with (output_dir / "log.txt").open("a") as f:
                 f.write(json.dumps(log_stats) + "\n")
 
-            if args.dataset in ['owod'] and epoch % args.eval_every == 0 and epoch > 0:
+            if args.dataset in ['owod'] and (epoch + 1) % args.eval_every == 0 and epoch > 0:
                 # for evaluation logs
                 if coco_evaluator is not None:
                     (output_dir / 'eval').mkdir(exist_ok=True)
                     if "bbox" in coco_evaluator.coco_eval:
                         filenames = ['latest.pth']
-                        if epoch % 50 == 0:
+                        if (epoch + 1) % 50 == 0:
                             filenames.append(f'{epoch:03}.pth')
                         for name in filenames:
                             torch.save(coco_evaluator.coco_eval["bbox"].eval,
